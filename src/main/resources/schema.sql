@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS city;
+
+CREATE TABLE city
+(
+  name VARCHAR(255) NOT NULL,
+  latitude DOUBLE NOT NULL,
+  longitude DOUBLE NOT NULL,
+  PRIMARY KEY (name)
+);
