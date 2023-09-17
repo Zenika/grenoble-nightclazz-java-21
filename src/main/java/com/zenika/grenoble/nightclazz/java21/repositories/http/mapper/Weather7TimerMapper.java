@@ -35,69 +35,24 @@ public class Weather7TimerMapper {
     }
 
     public static WeatherState getWeatherState(String weather) {
-        switch (weather) {
-            case "clear":
-            case "clearday":
-            case "clearnight":
-                return WeatherState.SUNNY;
-            case "pcloudy":
-            case "pcloudyday":
-            case "pcloudynight":
-            case "windy":
-            case "windyday":
-            case "windynight":
-            case "humid":
-                return WeatherState.PARTLY_CLOUDY;
-            case "mcloudy":
-            case "mcloudynight":
-            case "mcloudyday":
-                return WeatherState.CLOUDY_S_SUNNY;
-            case "cloudy":
-            case "cloudyday":
-            case "cloudynight":
-                return WeatherState.CLOUDY;
-            case "fog":
-            case "fogday":
-            case "fognight":
-            case "humidnight":
-            case "humidday":
-                return WeatherState.FOG;
-            case "lightrain":
-            case "lightrainday":
-            case "lightrainnight":
-            case "rain":
-            case "rainday":
-            case "rainnight":
-                return WeatherState.RAIN;
-            case "oshower":
-            case "oshowerday":
-            case "oshowernight":
-                return WeatherState.RAIN_S_SUNNY;
-            case "ishower":
-            case "ishowerday":
-            case "ishowernight":
-                return WeatherState.SUNNY_S_RAIN;
-            case "lightsnow":
-            case "lightsnowday":
-            case "lightsnownight":
-                return WeatherState.SNOW_LIGHT;
-            case "snow":
-            case "snowday":
-            case "snownight":
-                return WeatherState.SNOW;
-            case "rainsnow":
-            case "rainsnowday":
-            case "rainsnownight":
-                return WeatherState.SLEET;
-            case "ts":
-            case "tstorm":
-            case "tsrrain":
-            case "tsnight":
-            case "tsday":
-                return WeatherState.THUNDERSTORMS;
-            default:
+        return switch (weather) {
+            case "clear", "clearday", "clearnight" -> WeatherState.SUNNY;
+            case "pcloudy", "pcloudyday", "pcloudynight", "windy", "windyday", "windynight", "humid" ->
+                    WeatherState.PARTLY_CLOUDY;
+            case "mcloudy", "mcloudynight", "mcloudyday" -> WeatherState.CLOUDY_S_SUNNY;
+            case "cloudy", "cloudyday", "cloudynight" -> WeatherState.CLOUDY;
+            case "fog", "fogday", "fognight", "humidnight", "humidday" -> WeatherState.FOG;
+            case "lightrain", "lightrainday", "lightrainnight", "rain", "rainday", "rainnight" -> WeatherState.RAIN;
+            case "oshower", "oshowerday", "oshowernight" -> WeatherState.RAIN_S_SUNNY;
+            case "ishower", "ishowerday", "ishowernight" -> WeatherState.SUNNY_S_RAIN;
+            case "lightsnow", "lightsnowday", "lightsnownight" -> WeatherState.SNOW_LIGHT;
+            case "snow", "snowday", "snownight" -> WeatherState.SNOW;
+            case "rainsnow", "rainsnowday", "rainsnownight" -> WeatherState.SLEET;
+            case "ts", "tstorm", "tsrrain", "tsnight", "tsday" -> WeatherState.THUNDERSTORMS;
+            default -> {
                 System.out.println(weather + " is unknown");
-                return WeatherState.UNKNOWN;
-        }
+                yield WeatherState.UNKNOWN;
+            }
+        };
     }
 }
