@@ -26,12 +26,12 @@ public class FetchWeatherCacheConfig implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        List<City> cities = citiesRepository.findAll();
-        ExecutorService executor = Executors.newFixedThreadPool(cities.size()); // You can adjust the thread pool size as needed
-        for (City city : cities) {
+        var cities = citiesRepository.findAll();
+        var executor = Executors.newFixedThreadPool(cities.size()); // You can adjust the thread pool size as needed
+        for (var city : cities) {
             executor.submit(() -> {
-                Future<?> jobDaily = executor.submit(() -> weatherService.getDailyWeatherForCity(city.getName()));
-                Future<?> jobHourly = executor.submit(() -> weatherService.getHourlyWeatherForCity(city.getName()));
+                var jobDaily = executor.submit(() -> weatherService.getDailyWeatherForCity(city.getName()));
+                var jobHourly = executor.submit(() -> weatherService.getHourlyWeatherForCity(city.getName()));
                 try {
                     jobDaily.get();
                     jobHourly.get();

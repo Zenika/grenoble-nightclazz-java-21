@@ -32,9 +32,9 @@ public class WeatherRepository7Timer implements WeatherRepository {
 
     @Override
     public List<DailyWeather> getDailyWeather(City city) {
-        String response = getResponse(city, "civillight");
+        var response = getResponse(city, "civillight");
         try {
-            DailyWeather7Timer result = objectMapper.readValue(response, DailyWeather7Timer.class);
+            var result = objectMapper.readValue(response, DailyWeather7Timer.class);
             return Weather7TimerMapper.toDomain(result);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
@@ -43,7 +43,7 @@ public class WeatherRepository7Timer implements WeatherRepository {
 
     @Override
     public List<HourlyWeather> getHourlyWeather(City city) {
-        String response = getResponse(city, "civil");
+        var response = getResponse(city, "civil");
         try {
             HourlyWeather7Timer result = objectMapper.readValue(response, HourlyWeather7Timer.class);
             return Weather7TimerMapper.toDomain(result);
@@ -53,7 +53,7 @@ public class WeatherRepository7Timer implements WeatherRepository {
     }
 
     private String getResponse(City city, String product) {
-        String url = weatherUrl + "/" + product + ".php?lon=" + city.getPosition().getLongitude() +
+        var url = weatherUrl + "/" + product + ".php?lon=" + city.getPosition().getLongitude() +
                 "&lat=" + city.getPosition().getLatitude() +
                 "&ac=0&unit=metric&output=json&tzshift=0";
         return restTemplate.getForObject(url, String.class);

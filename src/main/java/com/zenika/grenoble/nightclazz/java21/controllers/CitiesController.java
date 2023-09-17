@@ -25,7 +25,7 @@ public class CitiesController {
 
     @GetMapping("/{name}")
     public ResponseEntity<City> getCity(@PathVariable String name) {
-        City city = cityRepository.getByName(name);
+        var city = cityRepository.getByName(name);
         if (city != null) {
             return ResponseEntity.ok(city);
         } else {
@@ -35,7 +35,7 @@ public class CitiesController {
 
     @PostMapping
     public ResponseEntity<City> addCity(@RequestBody City city) {
-        City savedCity = cityRepository.save(city);
+        var savedCity = cityRepository.save(city);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCity);
     }
 }

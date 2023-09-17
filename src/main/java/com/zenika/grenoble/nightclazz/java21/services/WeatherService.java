@@ -23,7 +23,7 @@ public class WeatherService {
 
     @Cacheable(cacheNames = "dailyWeather")
     public List<DailyWeather> getDailyWeatherForCity(String name) {
-        City city = cityRepository.getByName(name);
+        var city = cityRepository.getByName(name);
         if (city != null) {
             return weatherRepository.getDailyWeather(city);
         }
@@ -32,7 +32,7 @@ public class WeatherService {
 
     @Cacheable(cacheNames = "hourlyWeather")
     public List<HourlyWeather> getHourlyWeatherForCity(String name) {
-        City city = cityRepository.getByName(name);
+        var city = cityRepository.getByName(name);
         if (city != null) {
             return weatherRepository.getHourlyWeather(city);
         }

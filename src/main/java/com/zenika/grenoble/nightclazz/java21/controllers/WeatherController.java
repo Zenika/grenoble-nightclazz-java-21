@@ -29,7 +29,7 @@ public class WeatherController {
 
     @GetMapping("/{name}/weather/daily")
     public ResponseEntity<List<DailyWeather>> getDailyWeather(@PathVariable String name) {
-        List<DailyWeather> dailyWeather = weatherService.getDailyWeatherForCity(name);
+        var dailyWeather = weatherService.getDailyWeatherForCity(name);
         if (dailyWeather != null) {
             return ResponseEntity.ok(dailyWeather);
         } else {
@@ -39,7 +39,7 @@ public class WeatherController {
 
     @GetMapping("/{name}/weather/hourly")
     public ResponseEntity<List<HourlyWeather>> getHourlyWeather(@PathVariable String name) {
-        List<HourlyWeather> hourlyWeather = weatherService.getHourlyWeatherForCity(name);
+        var hourlyWeather = weatherService.getHourlyWeatherForCity(name);
         if (hourlyWeather != null) {
             return ResponseEntity.ok(hourlyWeather);
         } else {
@@ -51,7 +51,7 @@ public class WeatherController {
     public List<CityWithWeather> getCitiesWeather() {
         return citiesRepository.findAll().parallelStream()
                 .map(city -> {
-                    List<HourlyWeather> weathers = weatherService.getHourlyWeatherForCity(city.getName());
+                    var weathers = weatherService.getHourlyWeatherForCity(city.getName());
                     if (weathers != null && !weathers.isEmpty()) {
                         return new CityWithWeather(city.getName(), weathers.get(0));
                     }

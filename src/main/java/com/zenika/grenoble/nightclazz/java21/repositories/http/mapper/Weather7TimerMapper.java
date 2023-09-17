@@ -25,7 +25,7 @@ public class Weather7TimerMapper {
     }
 
     public static List<HourlyWeather> toDomain(HourlyWeather7Timer dailyWeather7Timer) {
-        LocalDateTime current = LocalDateTime.now();
+        var current = LocalDateTime.now();
         return dailyWeather7Timer.getDataseries().stream()
                 .map(dataSeries -> new HourlyWeather(
                         current.plusHours(dataSeries.getTimepoint()),
