@@ -15,22 +15,22 @@ import java.util.stream.Collectors;
 public class Weather7TimerMapper {
 
     public static List<DailyWeather> toDomain(DailyWeather7Timer dailyWeather7Timer) {
-        return dailyWeather7Timer.getDataseries().stream()
+        return dailyWeather7Timer.dataseries().stream()
                 .map(dataSeries -> new DailyWeather(
-                        LocalDate.parse(dataSeries.getDate(), DateTimeFormatter.ofPattern("yyyyMMdd")),
-                        getWeatherState(dataSeries.getWeather()),
-                        dataSeries.getTemp2m().getMax(),
-                        dataSeries.getTemp2m().getMin()))
+                        LocalDate.parse(dataSeries.date(), DateTimeFormatter.ofPattern("yyyyMMdd")),
+                        getWeatherState(dataSeries.weather()),
+                        dataSeries.temp2m().max(),
+                        dataSeries.temp2m().min()))
                 .collect(Collectors.toList());
     }
 
     public static List<HourlyWeather> toDomain(HourlyWeather7Timer dailyWeather7Timer) {
         LocalDateTime current = LocalDateTime.now();
-        return dailyWeather7Timer.getDataseries().stream()
+        return dailyWeather7Timer.dataseries().stream()
                 .map(dataSeries -> new HourlyWeather(
-                        current.plusHours(dataSeries.getTimepoint()),
-                        getWeatherState(dataSeries.getWeather()),
-                        dataSeries.getTemp2m()))
+                        current.plusHours(dataSeries.timepoint()),
+                        getWeatherState(dataSeries.weather()),
+                        dataSeries.temp2m()))
                 .collect(Collectors.toList());
     }
 
