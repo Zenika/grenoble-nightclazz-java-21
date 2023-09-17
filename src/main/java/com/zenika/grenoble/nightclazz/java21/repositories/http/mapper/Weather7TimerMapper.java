@@ -5,6 +5,7 @@ import com.zenika.grenoble.nightclazz.java21.entities.DailyWeather;
 import com.zenika.grenoble.nightclazz.java21.entities.WeatherState;
 import com.zenika.grenoble.nightclazz.java21.repositories.http.dto.HourlyWeather7Timer;
 import com.zenika.grenoble.nightclazz.java21.repositories.http.dto.DailyWeather7Timer;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class Weather7TimerMapper {
 
     public static List<DailyWeather> toDomain(DailyWeather7Timer dailyWeather7Timer) {
         return dailyWeather7Timer.getDataseries().stream()
-                .map(dataSeries -> new DailyWeather(
+                .map((@NonNull var dataSeries) -> new DailyWeather(
                         LocalDate.parse(dataSeries.getDate(), DateTimeFormatter.ofPattern("yyyyMMdd")),
                         getWeatherState(dataSeries.getWeather()),
                         dataSeries.getTemp2m().getMax(),
